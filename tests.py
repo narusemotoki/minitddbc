@@ -66,3 +66,12 @@ def test_マイナーを上げるテスト(source, expect):
 def test_メジャーを上げるテスト(source, expect):
     before = semver.Semver.create(*source)
     assert before.bump_major() == semver.Semver.create(*expect)
+
+
+@pytest.mark.parametrize("left, right, expect", [
+    ((1, 3, 9), (1, 4, 2), False),
+    ((10, 3, 5), (2, 23, 1), True),
+])
+def test_バージョンの大小比較(left, right, expect):
+    assert (semver.Semver.create(*left) > semver.Semver.create(*right)) == expect
+
