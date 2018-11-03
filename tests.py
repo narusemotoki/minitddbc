@@ -26,5 +26,16 @@ def test_バージョン比較(source, other, expect):
     (2, 1, -1),
 ])
 def test_負の数だったらエラー(source):
+    with pytest.raises(ValueError):
+        semver.Semver.create(*source)
+
+
+@pytest.mark.parametrize("source", [
+    (1, "4", 2),
+    (2, 1, "1"),
+    ("2", 1, 1),
+    ("True", "a", "bc"),
+])
+def test_文字列が来たらエラー(source):
     with pytest.raises(TypeError):
         semver.Semver.create(*source)
