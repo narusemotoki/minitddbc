@@ -56,3 +56,14 @@ def test_パッチを上げるテスト(source, expect):
 def test_マイナーを上げるテスト(source, expect):
     before = semver.Semver.create(*source)
     assert before.bump_minor() == semver.Semver.create(*expect)
+
+
+@pytest.mark.parametrize("source, expect", [
+    ((1, 0, 0), (2, 0, 0)),
+    ((0, 9, 0), (1, 0, 0)),
+    ((9, 9, 5), (10, 0, 0)),
+])
+def test_メジャーを上げるテスト(source, expect):
+    before = semver.Semver.create(*source)
+    assert before.bump_major() == semver.Semver.create(*expect)
+

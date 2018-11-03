@@ -44,3 +44,10 @@ class Semver(NamedTuple):
         """パッチバージョンを上げた新しいインスタンスを返します。
         """
         return self._replace(patch=self.patch+1)
+
+    def bump_minor(self) -> "Semver":
+        """マイナーバージョンを上げた新しいインスタンスを返します。
+        
+        マイナーバージョンが上がるときには、パッチは0に戻ります。
+        """
+        return self._replace(minor=self.minor+1, patch=0)
