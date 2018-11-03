@@ -73,5 +73,5 @@ def test_メジャーを上げるテスト(source, expect):
     ((10, 3, 5), (2, 23, 1), True),
 ])
 def test_バージョンの大小比較(left, right, expect):
-    assert (semver.Semver.create(*left) > semver.Semver.create(*right)) == expect
-
+    assert (semver.Semver.create(*left) > semver.Semver.create(*right)) == \
+        expect
