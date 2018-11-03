@@ -1,4 +1,7 @@
-from typing import NamedTuple
+from typing import (
+    Any,
+    NamedTuple,
+)
 
 
 class Semver(NamedTuple):
@@ -10,14 +13,13 @@ class Semver(NamedTuple):
         return f"{self.major}.{self.minor}.{self.patch}"
 
     @classmethod
-    def create(cls, major, minor, patch):
-        if not isinstance(major, int):
-            raise TypeError()
+    def _validate(cls, version: Any) -> None:
+        if not isinstance(version, int) or version < 0:
+            raise TypeError("Version must be positive integer or 0.")
 
-        if not isinstance(minor, int):
-            raise TypeError()
-
-        if not isinstance(patch, int):
-            raise TypeError()
+    @classmethod
+    def create(cls, major: int, minor: int, patch: int) -> 'Semver':
+        for version in [major, minor, patch]:
+            cls._validate(version)
 
         return cls(major, minor, patch)

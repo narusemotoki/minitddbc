@@ -12,11 +12,13 @@ def test_文字列表現(source, expect):
 
 
 @pytest.mark.parametrize("source,other,expect", [
-    ((1, 4, 2),(1, 4, 2), True),
-    ((2, 1, 1),(3, 5, 4), False),
+    ((1, 4, 2), (1, 4, 2), True),
+    ((2, 1, 1), (3, 5, 4), False),
 ])
 def test_バージョン比較(source, other, expect):
-    assert (semver.Semver.create(*source) == semver.Semver.create(*other)) == expect
+    assert (semver.Semver.create(*source) == semver.Semver.create(*other)) \
+        == expect
+
 
 @pytest.mark.parametrize("source", [
     (-1, 4, 2),
@@ -25,4 +27,4 @@ def test_バージョン比較(source, other, expect):
 ])
 def test_負の数だったらエラー(source):
     with pytest.raises(TypeError):
-        semver.Semver.create(*source) 
+        semver.Semver.create(*source)
