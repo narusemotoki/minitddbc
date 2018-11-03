@@ -47,7 +47,14 @@ class Semver(NamedTuple):
 
     def bump_minor(self) -> "Semver":
         """マイナーバージョンを上げた新しいインスタンスを返します。
-        
+
         マイナーバージョンが上がるときには、パッチは0に戻ります。
         """
         return self._replace(minor=self.minor+1, patch=0)
+
+    def bump_major(self) -> "Semver":
+        """メジャーバージョンを上げた新しいインスタンスを返します。
+
+        メジャーバージョンが上がるときには、マイナーおよびパッチは0に戻ります。
+        """
+        return self._replace(major=self.major+1, minor=0, patch=0)

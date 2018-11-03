@@ -66,4 +66,3 @@ def test_マイナーを上げるテスト(source, expect):
 def test_メジャーを上げるテスト(source, expect):
     before = semver.Semver.create(*source)
     assert before.bump_major() == semver.Semver.create(*expect)
-
