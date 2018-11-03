@@ -1,5 +1,10 @@
+from typing import NamedTuple
 
-class Semver:
+
+class Semver(NamedTuple):
+    major: str
+    minor: str
+    patch: str
 
     def __str__(self) -> str:
-        return "1.4.2"
+        return ".".join(self)
