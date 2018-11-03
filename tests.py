@@ -5,7 +5,7 @@ import pytest
 
 @pytest.mark.parametrize("source,expect", [
     ((1, 4, 2), "1.4.2"),
-    ((2, 1, 1), "2.1.1"),
+    ((2, 1, 0), "2.1.0"),
 ])
 def test_文字列表現(source, expect):
     assert str(semver.Semver.create(*source)) == expect
@@ -17,3 +17,12 @@ def test_文字列表現(source, expect):
 ])
 def test_バージョン比較(source, other, expect):
     assert (semver.Semver.create(*source) == semver.Semver.create(*other)) == expect
+
+@pytest.mark.parametrize("source", [
+    (-1, 4, 2),
+    (2, -1, 1),
+    (2, 1, -1),
+])
+def test_負の数だったらエラー(source):
+    with pytest.raises(TypeError):
+        semver.Semver.create(*source) 
