@@ -5,6 +5,9 @@ from typing import (
 
 
 class Semver(NamedTuple):
+    """プロフェッショナルユーザ以外はコンストラクタ式を呼ばないでください。
+    代わりにcreateを呼んでください。
+    """
     major: int
     minor: int
     patch: int
@@ -14,6 +17,11 @@ class Semver(NamedTuple):
 
     @classmethod
     def _validate(cls, version: Any) -> None:
+        """バージョンが許されない値であればエラーを上げます。
+
+        :raise TypeError: versionがint型でなかった場合
+        :raise ValueError: versionが負の値の場合
+        """
         if not isinstance(version, int):
             raise TypeError("Version must be integer.")
 
@@ -21,7 +29,12 @@ class Semver(NamedTuple):
             raise ValueError("Version must be positive integer or 0.")
 
     @classmethod
-    def create(cls, major: int, minor: int, patch: int) -> 'Semver':
+    def create(cls, major: int, minor: int, patch: int) -> "Semver":
+        """インスタンスを作るためのメソッドです。
+
+        コンストラクタ式の代わりに呼んでください。コンストラクタ式との違いは、
+        値のバリデーションがこちらにあることです。
+        """
         for version in [major, minor, patch]:
             cls._validate(version)
 
