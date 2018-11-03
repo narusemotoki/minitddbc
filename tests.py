@@ -40,11 +40,10 @@ def test_文字列が来たらエラー(source):
     with pytest.raises(TypeError):
         semver.Semver.create(*source)
 
+
 @pytest.mark.parametrize("source, expect", [
-    ((1, 1, 0), (1, 1, 1) )
+    ((1, 1, 0), (1, 1, 1))
 ])
 def test_パッチを上げるテスト(source, expect):
     before = semver.Semver.create(*source)
-    before.bump_patch() == semver.Semver.create(*expect)
-
-
+    assert before.bump_patch() == semver.Semver.create(*expect)

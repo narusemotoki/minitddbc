@@ -39,3 +39,8 @@ class Semver(NamedTuple):
             cls._validate(version)
 
         return cls(major, minor, patch)
+
+    def bump_patch(self) -> "Semver":
+        """パッチバージョンを上げた新しいインスタンスを返します。
+        """
+        return self._replace(patch=self.patch+1)
