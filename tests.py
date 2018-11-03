@@ -47,3 +47,12 @@ def test_文字列が来たらエラー(source):
 def test_パッチを上げるテスト(source, expect):
     before = semver.Semver.create(*source)
     assert before.bump_patch() == semver.Semver.create(*expect)
+
+
+@pytest.mark.parametrize("source, expect", [
+    ((1, 1, 1), (1, 2, 0)),
+    ((0, 9, 0), (0, 10, 0)),
+])
+def test_マイナーを上げるテスト(source, expect):
+    before = semver.Semver.create(*source)
+    assert before.bump_minor() == semver.Semver.create(*expect)
